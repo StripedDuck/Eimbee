@@ -1,0 +1,12 @@
+﻿@page "/Auth/Logout"
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using Microsoft.AspNetCore.Authorization
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+@code {
+    protected override void OnInitialized()
+    {
+        SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
+}
