@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+﻿using Eimbee.Core.Enums;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -15,14 +16,11 @@ namespace Eimbee.DataAccessLayer.Entity
          public string IcaoCodeHex{ get; set; } 
          public string IataCodeShort{ get; set; } 
          public int ConstructionNumber{ get; set; }          
-         public DateTime first_flight_date{ get; set; } 
-         public DateTime delivery_date{ get; set; } 
-         public string plane_series{ get; set; } 
-         public string airline_iata_code{ get; set; } 
-         public string airline_icao_code{ get; set; } 
-         public string plane_owner{ get; set; } 
-         public string engines_type{ get; set; }
-         public string plane_status{ get; set; }
+         public string PlaneSeries{ get; set; } 
+         public string AirlineIataCode{ get; set; } 
+         public string AirlineIcaoCode{ get; set; } 
+         public string EnginesType{ get; set; }
+         public AircraftStatus Status{ get; set; }
         
     }
 }

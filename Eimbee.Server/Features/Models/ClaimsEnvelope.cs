@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace Eimbee.Server.Features.Models
 {
-    public class PilotDetailsEnvelope
-    {
+    public class ClaimsEnvelope
+    {                  
+        public string VirtualAirline { get; set; }
+        public string Role { get; set; }
     }
 }

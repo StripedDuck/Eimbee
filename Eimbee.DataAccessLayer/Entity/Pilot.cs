@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+using Eimbee.Core.Enums;
 
 namespace Eimbee.DataAccessLayer.Entity
 {
@@ -16,6 +15,8 @@ namespace Eimbee.DataAccessLayer.Entity
         public Airport Airport { get; set; }
         [ForeignKey("VirtualAirline")]
         public Airline Airline { get; set; }
+        public Role Role { get; set; }
+        public Rank Rank { get; set; }
 
     }
 }

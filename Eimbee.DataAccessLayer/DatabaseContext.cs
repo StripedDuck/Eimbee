@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Eimbee.DataAccessLayer.Extensions;
 using Eimbee.DataAccessLayer.Entity;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Eimbee.Core.Enums;
 
 namespace Eimbee.DataAccessLayer
 {
@@ -34,6 +36,26 @@ namespace Eimbee.DataAccessLayer
 
             modelBuilder.Entity<Airport>()
                 .HasIndex(p => new { p.IcaoCode });
+
+            var rankConverter = new EnumToStringConverter<Rank>();
+
+            modelBuilder
+                .Entity<Pilot>()
+                .Property(e => e.Rank)
+                .HasConversion(rankConverter);
+
+            var roleConverter = new EnumToStringConverter<Role>();
+
+            modelBuilder
+                .Entity<Pilot>()
+                .Property(e => e.Role);
+
+            var aircraftStatusConverter = new EnumToStringConverter<AircraftStatus>();
+
+            modelBuilder
+                .Entity<Aircraft>()
+                .Property(e => e.Status)
+                .HasConversion(aircraftStatusConverter);
         }
     }
 }
