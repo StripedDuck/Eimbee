@@ -18,6 +18,7 @@ namespace Eimbee.DataAccessLayer
         public DbSet<AirlineRoute> AirlineRoutes { get; set; }
         public DbSet<Aircraft> Aircrafts { get; set; }
         public DbSet<AircraftType> AircraftTypes { get; set; }
+        public DbSet<Pilot> Pilots { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

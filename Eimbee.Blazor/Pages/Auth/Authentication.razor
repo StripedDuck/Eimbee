@@ -1,6 +1,7 @@
 ﻿@page "/authentication/{action}"
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using System.Threading.Tasks
+@inject NavigationManager Navigation
 
 <RemoteAuthenticatorView Action="@Action" OnLogOutSucceeded=@OnLogOutSucceeded OnLogInSucceeded=@OnLogInSucceeded />
 
@@ -18,7 +19,7 @@
 
         if (user.Identity.IsAuthenticated)
         {
-            // Do some stuff
+            Navigation.NavigateTo($"/Admin/Administration");
         }
     }
 

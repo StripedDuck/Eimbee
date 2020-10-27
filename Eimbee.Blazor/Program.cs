@@ -1,13 +1,10 @@
 using System;
 using System.Net.Http;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Text;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace Eimbee.Blazor
 {
@@ -18,14 +15,21 @@ namespace Eimbee.Blazor
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddHttpClient("Eimbee.Server", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+                .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
-            builder.Services.AddMsalAuthentication(options =>
+            // Supply HttpClient instances that include access tokens when making requests to the server project
+            builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("Eimbee.Server"));
+
+
+            builder.Services.AddOidcAuthentication(options =>
             {
-                builder.Configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);
-                // add scope in for api calls once the get there
-                ////options.ProviderOptions.DefaultAccessTokenScopes.Add("{SCOPE URI}");
+                options.ProviderOptions.Authority = builder.Configuration.GetValue<string>("Okta:Authority");
+                options.ProviderOptions.ClientId = builder.Configuration.GetValue<string>("Okta:ClientId"); ;
+                options.ProviderOptions.ResponseType = "code";
             });
+
+            builder.Services.AddApiAuthorization();
 
             await builder.Build().RunAsync();
         }
