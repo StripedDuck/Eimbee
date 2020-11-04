@@ -13,6 +13,7 @@ namespace Eimbee.Server.Features.Pilots
         public class Command : IRequest<ClaimsEnvelope>
         {
             public string Email { get; set; }
+            public string Location { get; set; }
         }
 
 

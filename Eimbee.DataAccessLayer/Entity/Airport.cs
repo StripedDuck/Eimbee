@@ -12,12 +12,13 @@ namespace Eimbee.DataAccessLayer.Entity
         public string Name { get; set; }        
         public string Latitude { get; set; }
         public string Longitude { get; set; }
+        public string CityIataCode { get; set; }
+        public string CountryIso2 { get; set; }
         [ForeignKey("CountryIso2")]
         public Country Country { get; set; }
-        public string CountryIso2 { get; set; }
         [ForeignKey("CityIataCode")]
         public City City { get; set; }
-        public string CityIataCode { get; set; }
+        
 
     }
 }
